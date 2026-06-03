@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lin Khant Min Maung | Software Developer</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #ffffff;
+            color: #111111;
+            line-height: 1.75;
+            font-weight: 300;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        body.dark {
+            background: #0a0a0a;
+            color: #f5f5f5;
+            /* Brighter white for better readability */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #4da6ff;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 10px;
+            height: 10px;
+            background: #111;
+            border-radius: 50%;
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+        }
+
+        body.dark .cursor {
+            background: #ffffff;
+        }
+
+        .cursor-ring {
+            width: 36px;
+            height: 36px;
+            /* border: 1px solid #111; */
+            border-radius: 50%;
+            position: fixed;
+            z-index: 9998;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            opacity: 0.5;
+        }
+
+        body.dark .cursor-ring {
+            border-color: #ffffff;
+            opacity: 0.7;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 28px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid #eee;
+            z-index: 1000;
+            transition: all 0.4s;
+        }
+
+        body.dark nav {
+            background: rgba(10, 10, 10, 0.98);
+            border-bottom: 1px solid #222;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #555;
+        }
+
+        body.dark .nav-menu a {
+            color: #ddd;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            width: 50px;
+            height: 26px;
+            background: #e0e0e0;
+            border-radius: 50px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        body.dark .theme-toggle {
+            background: #333;
+        }
+
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: #ffffff;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark .theme-toggle::after {
+            transform: translateX(24px);
+            background: #0a0a0a;
+        }
+
+        #hero {
+            min-height: 100vh;
+            padding: 180px 60px 120px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        body.dark #hero {
+            border-bottom: 1px solid #222;
+        }
+
+        #hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(60px, 9vw, 120px);
+            line-height: 0.95;
+            font-weight: 900;
+            margin-bottom: 24px;
+        }
+
+        /* Circular Profile Photo */
+        .hero-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-photo {
+            flex: 0 0 280px;
+            text-align: center;
+        }
+
+        .hero-photo img {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .hero-photo img:hover {
+            transform: scale(1.04);
+        }
+
+        section {
+            padding: 100px 60px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        body.dark section {
+            border-bottom: 1px solid #222;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee;
+        }
+
+        body.dark .section-header {
+            border-bottom: 1px solid #222;
+        }
+
+        .section-num {
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #999;
+        }
+
+        body.dark .section-num {
+            color: #888;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .exp-row,
+        .project-row {
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #eee;
+        }
+
+        body.dark .exp-row,
+        body.dark .project-row {
+            border-bottom: 1px solid #222;
+        }
+
+        .exp-period {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        body.dark .exp-period {
+            color: #bbbbbb;
+        }
+
+        .exp-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .exp-company {
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        body.dark .exp-company {
+            color: #cccccc;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+        }
+
+        .skill-category h3 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        body.dark .skill-category h3 {
+            color: #f5f5f5;
+        }
+
+        .skill-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 15.5px;
+        }
+
+        body.dark .skill-item {
+            border-bottom: 1px solid #222;
+        }
+
+        .skill-icons i {
+            font-size: 38px;
+            color: #222;
+        }
+
+        body.dark .skill-icons i {
+            color: #f5f5f5;
+        }
+
+        #contact {
+            background: #f8f8f8;
+            text-align: center;
+            padding: 140px 60px;
+        }
+
+        body.dark #contact {
+            background: #111;
+        }
+
+        .contact-big {
+            font-family: 'Playfair Display', serif;
+            font-size: 68px;
+            line-height: 1.05;
+            font-weight: 900;
+            margin-bottom: 40px;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 17px;
+        }
+
+        footer {
+            padding: 30px 60px;
+            background: #111;
+            color: #aaa;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        body.dark footer {
+            background: #000;
+            color: #999;
+        }
+
+        /* Improved dark mode text contrast */
+        body.dark p,
+        body.dark li {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark div,
+        body.dark span {
+            color: inherit;
+        }
+
+        body.dark h3 {
+            color: #f0f0f0 !important;
+        }
+
+        body.dark strong {
+            color: #ffffff;
+        }
+
+        @media (max-width: 900px) {
+
+            nav,
+            section {
+                padding: 20px 28px;
+            }
+
+            .cursor,
+            .cursor-ring {
+                display: none;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-photo {
+                margin: 40px auto 0;
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 28px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid #eee;
+            z-index: 1000;
+            transition: all 0.4s;
+        }
+
+        body.dark nav {
+            background: rgba(10, 10, 10, 0.98);
+            border-bottom: 1px solid #222;
+        }
+
+        /* Desktop Layout */
+        .nav-left,
+        .nav-center,
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-center {
+            display: none;
+            /* Hidden on desktop */
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu a {
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #555;
+        }
+
+        body.dark .nav-menu a {
+            color: #ddd;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 2px;
+            background: #111;
+            transition: all 0.3s;
+        }
+
+        body.dark .hamburger span {
+            background: #fff;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            nav {
+                padding: 20px 28px;
+            }
+
+            .nav-left {
+                display: none;
+                /* Hide left logo on mobile */
+            }
+
+            .nav-center {
+                display: block;
+                /* Show centered logo on mobile */
+                flex: 1;
+                text-align: center;
+            }
+
+            .mobile-logo {
+                font-size: 17px;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: start;
+                padding-top: 60px;
+                gap: 40px;
+                transition: left 0.4s ease;
+                z-index: 999;
+            }
+
+            body.dark .nav-menu {
+                background: rgba(10, 10, 10, 0.98);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu a {
+                font-size: 18px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-right {
+                gap: 16px;
+            }
+
+            /* Hamburger Animation */
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Navigation -->
+    <!-- Navigation - Updated for Mobile -->
+    <nav>
+        <div class="nav-left">
+            <a href="#" class="nav-logo">Lin Khant Min Maung</a>
+        </div>
+
+        <div class="nav-center">
+            <a href="#" class="nav-logo mobile-logo">Lin Khant Min Maung</a>
+        </div>
+
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <div class="theme-toggle" id="themeToggle" title="Toggle Theme"></div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <p style="font-size:13px; letter-spacing:2px; color:#888; margin-bottom:16px;">
+                    AVAILABLE FOR INTERNSHIP / PART-TIME / FULL-TIME • ANYWHERE
+                </p>
+                <h1>Lin Khant Min Maung</h1>
+                <p style="max-width:680px; font-size:18px; color:#444; margin-top:32px;">
+                    Passionate Full-Stack Developer , Cross-Platform Developer and Computer Science student building
+                    scalable applications with clean, maintainable code.
+                </p>
+            </div>
+
+            <!-- Circular Profile Photo -->
+            <div class="hero-photo">
+                <img src="./images/me.jpg" alt="Lin Khant Min Maung - Full-Stack Developer" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="section-header">
+            <span class="section-num">01</span>
+            <h2>About Me</h2>
+        </div>
+        <p style="max-width:740px; font-size:17.5px;">
+            I'm a Computer Science student at Myanmar Institute of Information Technology (GPA 3.13/4.00), from
+            Mandalay, Myanmar.
+            Since 2024, I have been actively building real-world applications and sharing my knowledge by teaching
+            programming to over 270 students from different countries through my online academy, Oscord Code Academy.
+        </p>
+        <p style="max-width:740px; font-size:17.5px; margin-top:24px;">
+            I specialize in frontend development , backend development and database management.
+            I enjoy taking ownership of projects — from planning and development to delivery — and I bring a calm,
+            focused, and solution-oriented mindset to every challenge. Now , I am focusing on data analysis and AI fields to widthen my skill sets.
+        </p>
+
+        <!-- Personal Information -->
+        <div style="margin-top: 50px; max-width: 740px;">
+            <h3 style="font-size: 16px; margin-bottom: 18px;">Personal Information</h3>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px 50px; font-size: 15.5px; line-height: 1.7;">
+                <div><strong>Nationality:</strong> Myanmar</div>
+                <div><strong>Birthday:</strong> 10 September 2003</div>
+                <div><strong>Hometown:</strong> Mandalay, Myanmar</div>
+                <div><strong>Current Residence:</strong> Mandalay, Myanmar</div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="section-header">
+            <span class="section-num">02</span>
+            <h2>Education</h2>
+        </div>
+
+        <div class="exp-row">
+            <div class="exp-period">May 2022 — Present (Expected Graduation: February 2027)</div>
+            <div class="exp-title">Bachelor of Engineering in Computer Science and Engineering (Hons)</div>
+            <div class="exp-company">Myanmar Institute of Information Technology (MIIT), Myanmar</div>
+            <p style="margin-top: 12px;">Current GPA: 3.13 / 4.00</p>
+
+        </div>
+
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+        <div class="section-header">
+            <span class="section-num">03</span>
+            <h2>Work Experience</h2>
+        </div>
+
+        <div class="exp-row">
+            <div class="exp-period">October 2024 — Present</div>
+            <div class="exp-title">Primary Instructor</div>
+            <div class="exp-company">Oscord Code Academy (oscord.io)</div>
+
+            <p style="margin-bottom: 18px;">
+                Currently leading an online coding academy that has successfully taught over <strong>270
+                    students</strong> from various countries.
+                Deliver high-quality programming education through personalized one-on-one Zoom classes, group sessions,
+                and pre-recorded video lectures.
+            </p>
+
+            <ul style="margin: 20px 0; padding-left: 20px; line-height:1.6;">
+                <li>Teach Full-Stack Development </li>
+                <li>Ensure every student completes a real Full-Stack project by the end of each course</li>
+                <li>Design and manage assessments including tests, assignments, projects, and final exams</li>
+                <li>Provide personalized guidance and progress tracking for individual students</li>
+            </ul>
+
+            <p style="margin-top: 20px; font-size:15px;">
+                <strong>Key Achievement:</strong> Designed and implemented a complete educational ecosystem that
+                supports flexible enrollment, multi-format learning (live Zoom + video lectures), student progress
+                tracking, and assessment management — enabling consistent delivery of high-quality coding education at
+                scale.
+            </p>
+        </div>
+
+        <div class="exp-row">
+            <div class="exp-period">November 2025 — Present</div>
+            <div class="exp-title">Software Developer . Software Engineer </div>
+            <div class="exp-company">Ociolink Software Solutions Co., Ltd.</div>
+            <p>Architect and implement robust technical solutions, optimize system performance, and translate complex
+                business requirements into scalable, maintainable code. Collaborate across teams to ensure seamless
+                feature delivery while upholding high standards for security, stability, and the overall user
+                experience.</p>
+        </div>
+
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+        <div class="section-header">
+            <span class="section-num">04</span>
+            <h2>Recent Projects</h2>
+        </div>
+
+        <div class="project-row">
+            <div style="font-size:26px; font-weight:700; margin-bottom:12px;">01. Oscord.io – Learning Management System
+            </div>
+            <p><strong>Frontend Developer</strong><br>
+                Built and currently operate a complete online education platform used by over 270 students from multiple
+                countries.</p>
+            <p style="margin: 18px 0;">
+                Developed a robust Learning Management System featuring flexible course enrollment, video-based
+                learning, live Zoom classes, and a powerful admin dashboard.
+            </p>
+            <ul style="margin: 20px 0; padding-left: 20px; line-height:1.6;">
+                <li>Flexible course enrollment system allowing students to join anytime and take multiple courses</li>
+                <li>Video lecture streaming with secure access control</li>
+                <li>Live class integration via Zoom for instructor-led sessions</li>
+                <li>Downloadable resources and lecture materials</li>
+                <li>Comprehensive admin dashboard to manage courses, students, reviews, videos, and documents</li>
+                <li>Integrated marketing website for course promotion</li>
+            </ul>
+            <p style="margin-top: 20px; font-size:15px;">
+                <strong>Tech Stack:</strong> PHP, MySQL, JavaScript, HTML, CSS, Bootstrap
+            </p>
+            <p style="margin-top:16px;">
+                <a href="https://www.oscord.io" target="_blank">Live Site ↗</a> &nbsp;&nbsp;
+                <a href="https://github.com/MinSittPaingOo-Oscord/oscord.io" target="_blank">GitHub ↗</a>
+            </p>
+        </div>
+
+        <div class="project-row">
+            <div style="font-size:26px; font-weight:700; margin-bottom:12px;">02. Hyde Couture – Full-Featured
+                E-Commerce Platform</div>
+            <p><strong>Fullstack Developer</strong><br>
+                Built a complete e-commerce website for a local fashion brand supporting real customer orders, inventory
+                management, and admin operations.</p>
+            <p style="margin: 18px 0;">
+                Developed a robust online store with product catalog, shopping cart, order processing, and variant-based
+                inventory system.
+            </p>
+            <ul style="margin: 20px 0; padding-left: 20px; line-height:1.6;">
+                <li>User authentication with role-based access (Admin & Customer)</li>
+                <li>Product catalog with categories, variants (size, color), and images</li>
+                <li>Shopping cart, order placement, tracking, and status management</li>
+                <li>Advanced inventory system with stock tracking per variant</li>
+                <li>Quantity-based discount system</li>
+                <li>Comprehensive admin dashboard for products, orders, users, and reports</li>
+                <li>Payment handling via bank transfer with slip upload</li>
+            </ul>
+            <p style="margin-top: 20px; font-size:15px;">
+                <strong>Tech Stack:</strong> PHP, MySQL, JavaScript, HTML, CSS, Bootstrap
+            </p>
+            <p style="margin-top:16px;">
+                <a href="https://hyde-couture.com" target="_blank">Live Site ↗</a> &nbsp;&nbsp;
+                <a href="https://github.com/LinKhantAkaAisai/Hyde-Couture_Ecommerce" target="_blank">GitHub ↗</a>
+            </p>
+        </div>
+        <div class="project-row">
+            <div style="font-size:26px; font-weight:700; margin-bottom:12px;">03. CozyGift – Full-Featured E-Commerce
+                Platform</div>
+            <p><strong>Frontend Developer</strong><br>
+                Built a complete e-commerce website that allows users to browse, search, filter, and purchase gift
+                items. It includes user authentication, a shopping cart, and admin management features. The website also
+                provides flower suggestions and stories to enhance the user experience.</p>
+            <p style="margin: 18px 0;">
+                Developed a robust online store with product catalog, shopping cart, order processing, Multilingual
+                support , Search functionality and admin dashboard .
+            </p>
+            <ul style="margin: 20px 0; padding-left: 20px; line-height:1.6;">
+                <li>Homepage with dynamic design based on the current month</li>
+                <li>Product listing and filtering (category, price, color)</li>
+                <li>Search functionality</li>
+                <li>User authentication (login/signup)</li>
+                <li>User profile for billing and delivery information</li>
+                <li>Multilingual support (Myanmar ↔ English)</li>
+                <li>Add products to shopping cart and view checkout info</li>
+                <li>Flower suggestion page</li>
+                <li>Admin dashboard showing order details</li>
+                <li>User management (view/delete accounts)</li>
+                <li>Product management (add/update/delete products)</li>
+                <li>Flower story management</li>
+                <li>Order management (update status, cancel orders)</li>
+            </ul>
+            <p style="margin-top: 20px; font-size:15px;">
+                <strong>Tech Stack:</strong> Django, SQLite3, JavaScript, HTML, CSS, Bootstrap
+            </p>
+            <p style="margin-top:16px;">
+                <a href="#" target="_blank">Live Site ↗</a> &nbsp;&nbsp;
+                <a href="https://github.com/LinKhantAkaAisai/Online-Gift-Shop-Ecommerce" target="_blank">GitHub ↗</a>
+            </p>
+        </div>
+        <div class="project-row">
+            <div style="font-size:26px; font-weight:700; margin-bottom:12px;">04. FindME – Location Based Discovery
+                Mobile Platform</div>
+            <p><strong>Frontend Developer . Backend Developer </strong><br>
+                Built a specialized mobile app designed to help people find the best local spots like cafes, salons, and
+                cosmetic shops.</p>
+            <p style="margin: 18px 0;">
+                Instead of just giving you a random address, it gives you the specific details you actually care
+                about—like if a cafe has a quiet meeting room or what specific beauty treatments a salon offers.
+            </p>
+            <ul style="margin: 20px 0; padding-left: 20px; line-height:1.6;">
+                <li>User authentication with role-based access (App-Moderator , Shop-Owners & Customer)</li>
+                <li>Discover various kinds of <strong>shops</strong> based on Location Service (MAP) </li>
+                <li>Browse posts , upload posts , give reactions and bookmap posts</li>
+                <li>Admin Dashboard for shop owners , shop admins </li>
+                <li>Moderator Dashboard for App owners </li>
+                <li>Routing or Navigation System on Map </li>
+            </ul>
+            <p style="margin-top: 20px; font-size:15px;">
+                <strong>Tech Stack:</strong> Node.js , ExpressJS , PostgreSQL , React-Native
+            </p>
+            <p style="margin-top:16px;">
+                <a href="https://github.com/LinKhantAkaAisai/FindME-Location_Based_Discovery_Platform"
+                    target="_blank">GitHub ↗</a>
+            </p>
+        </div>
+
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+        <div class="section-header">
+            <span class="section-num">05</span>
+            <h2>Skills</h2>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Languages</h3>
+                <div class="skill-item">Java <span class="skill-icons"><i class="devicon-java-plain"></i></span></div>
+                <div class="skill-item">Python <span class="skill-icons"><i class="devicon-python-plain"></i></span>
+                </div>
+                <div class="skill-item">PHP <span class="skill-icons"><i class="devicon-php-plain"></i></span></div>
+                <div class="skill-item">JavaScript <span class="skill-icons"><i
+                            class="devicon-javascript-plain"></i></span></div>
+                
+                <div class="skill-item">HTML5 <span class="skill-icons"><i class="devicon-html5-plain"></i></span></div>
+                <div class="skill-item">CSS3 <span class="skill-icons"><i class="devicon-css3-plain"></i></span></div>
+
+            </div>
+
+            <div class="skill-category">
+                <h3>Frameworks & Databases</h3>
+                
+                <div class="skill-item">Express.js <span class="skill-icons"><i
+                            class="devicon-express-original"></i></span></div>
+                
+                <div class="skill-item">React.js <span class="skill-icons"><i class="devicon-react-original"></i></span>
+                </div>
+                <div class="skill-item">MySQL <span class="skill-icons"><i class="devicon-mysql-plain"></i></span></div>
+                <div class="skill-item">React Native <span class="skill-icons"><i class="devicon-react-original"></i></span></div>
+    
+    <div class="skill-item">Node.js <span class="skill-icons"><i class="devicon-nodejs-plain"></i></span></div>
+    
+    <div class="skill-item">PostgreSQL <span class="skill-icons"><i class="devicon-postgresql-plain"></i></span></div>
+
+            </div>
+
+            <div class="skill-category">
+                <h3>Soft Skills</h3>
+                <div class="skill-item">Calm & Focused Problem Solving</div>
+                <div class="skill-item">Vibe Coding with Powerful AI tools</div>
+                <div class="skill-item">Project Management & Ownership</div>
+                <div class="skill-item">Business Strategy & Communication</div>
+                <div class="skill-item">Curriculum Design & Teaching</div>
+                <div class="skill-item">Quick Learning & Adaptability</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="contact-big">
+            Let's work<br>together.
+        </div>
+        <div class="contact-links">
+            <a href="mailto:linkhantminmaung109@gmail.com">linkhantminmaung109@gmail.com</a><br>
+            <a href="https://t.me/aisai_03" target="_blank">Telegram: @aisai_03</a><br>
+            <a href="https://www.linkedin.com/in/lin-khant-aka-aisai/" target="_blank">LinkedIn</a><br>
+            <a href="https://github.com/LinKhantAkaAisai" target="_blank">GitHub</a><br>
+        </div>
+    </section>
+
+    <footer>
+        <div>© 2026 Lin Khant Min Maung</div>
+        <div>Mandalay , Myanmar</div>
+    </footer>
+
+    <script>
+        // Theme Toggle (keep your existing code)
+        const toggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+        });
+
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark');
+        }
+
+        // Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Cursor code (keep your existing cursor code here)
+        // ... your cursor code remains the same ...
+    </script>
+</body>
+
+</html>
