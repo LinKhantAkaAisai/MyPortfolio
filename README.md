@@ -2,7 +2,7 @@
 
 I am a passionate **Full-Stack Developer**, **Cross-Platform Developer**, and **Computer Science student** dedicated to building scalable applications with clean, maintainable code. I enjoy taking complete ownership of projects—from initial planning and backend database architecture to polished frontend delivery. 
 
-Currently, I am expanding my technical boundaries into **Data Analysis** and **AI fields** to widen my professional skill set.
+Currently, I am expanding my technical boundaries into **AI fields** to widen my professional skill set.
 
 🚀 **Available for:** Internship / Part-Time / Full-Time roles (Remote & On-site)
 
