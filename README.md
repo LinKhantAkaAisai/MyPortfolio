@@ -11,7 +11,7 @@ Currently, I am expanding my technical boundaries into **AI fields** to widen my
 ### 👤 About Me
 
 *   🎓 **Education:** Pursuing a B.E. in Computer Science and Engineering (Hons) at the **Myanmar Institute of Information Technology (MIIT)** (Expected Graduation: Feb 2027). Current GPA: `3.13 / 4.00`.
-*   👨‍🏫 **Teaching:** Primary Instructor at **Oscord Code Academy**, where I have taught full-stack programming to over **270+ international students**.
+*   👨‍🏫 **Teaching:** Primary Instructor at **Oscord Code Academy**, where I have taught full-stack programming to over **270+ students**.
 *   💼 **Industry Experience:** Remote Junior Software Developer & Engineer at **Ociolink Software Solutions Co., Ltd.**.
 *   📍 **Location:** Mandalay, Myanmar.
 
