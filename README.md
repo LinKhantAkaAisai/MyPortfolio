@@ -52,6 +52,11 @@ Currently, I am expanding my technical boundaries into **AI fields** to widen my
 *   **Description:** An interactive gift shop platform featuring multi-language support (Myanmar ↔ English), dynamic theme adjustments based on the current calendar month, gift suggestion logic, and order workflows.
 *   **Tech Stack:** Django, SQLite3, JavaScript, HTML, CSS, Bootstrap
 
+#### 05. [Shwe Myanmar – Burmese NLP Platform](https://github.com/Dorothyyoon/shwemyanmar)
+*   **Role:** Segmentation Model Developer & Tokenization
+*   **Description:** A trained NLP system for Burmese word segmentation and 15-class part-of-speech tagging, connected to a web-based GUI where users can test the models with their own text and learn how they work through color-coded results and live text statistics.
+*   **Tech Stack:** Python, PyTorch, Hugging Face Transformers, FastAPI, React, TypeScript, Tailwind CSS
+
 ---
 
 ### 🤝 Let's Connect
